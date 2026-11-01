@@ -9,7 +9,7 @@ export default function App() {
       <h1>Hello, React!</h1>
       <p>Your test-aws project is ready. Start building something great.</p>
       <button onClick={() => setCount((current) => current + 1)}>
-        Count: {count}
+        Count Number: {count}
       </button>
       <p className="hint">Edit <code>src/App.jsx</code> to get started.</p>
     </main>
