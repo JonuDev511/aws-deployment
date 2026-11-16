@@ -1,0 +1,11 @@
+Generator: built-in image_gen tool
+Final asset: public/images/mehchana-village-story-v3.jpg
+Reference: public/images/mehchana-village-story-v2.jpg
+
+Use case: photorealistic-natural.
+Asset: a wide photographic countryside banner for Mehchana, a Haryana ghee and mustard oil website.
+Reference: the attached local illustration is a loose reference for village warmth and its courtyard, cow, butter churning, and mustard fields. Create a new substantially more realistic image, not another painting. Replace the man carrying a milk can with a farmer actively tending golden mustard flowers IN THE FIELD. No milkman and no milk can.
+Scene: a continuous believable Haryana countryside photograph in gentle early morning light. Across the left and middle, lush golden-yellow mustard fields and a middle-aged Haryanvi farmer in natural off-white kurta and simple cotton turban, gently inspecting mustard flowers while standing on an earthen field path, natural unposed posture. On the right a modest brick and limewashed courtyard beneath a neem tree, a woman in a muted mustard dupatta churning butter in an earthen pot, and a calm healthy white cow and calf. A low rustic boundary wall links the courtyard with the mustard field. Distant authentic North Indian village buildings. No mountains.
+Composition: panoramic landscape 3:1 ratio, suitable for a shallow full-width website banner. Keep all people, cow and calf framed comfortably within the middle 65% vertically so a shallow banner preserves them. The farmer belongs in the mustard field, not the courtyard. He should be near the center-left. The upper-left corner has softly lit pale sky and quiet distant farmland suitable for short dark-green HTML heading. Avoid the huge empty sky of the original; the scene fills the frame.
+Style: entirely photorealistic editorial agricultural photograph, realistic human skin and clothing, accurate anatomy, authentic cows, real brick and plant detail, natural color, realistic subtle morning haze, crisp but not oversharpened. Not a painting, not an illustration, not CGI, no fantasy saturation.
+Text: none, no logos, no watermarks. Short text is added in HTML.

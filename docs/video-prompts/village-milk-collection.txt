@@ -1,0 +1,46 @@
+Village mornings — short-video brief
+
+Destination: the first short-video card (reel id: village) in src/App.jsx.
+Status: the first card now embeds the user's reference video unchanged:
+https://www.youtube.com/shorts/FhM5m9TsZ9E
+The original illustrated version is retained locally at
+public/videos/mehchana-village-mornings.mp4.
+Delivered: 16 seconds, 540 x 960, 24 fps, H.264 MP4, muted, flat illustration.
+Source: scripts/create-village-video.swift (CoreGraphics and AVFoundation).
+The photographic treatment below remains a brief for a future video variant.
+
+Setting and continuity
+A peaceful Haryana village in warm early-morning light, with brick homes,
+neem trees, and dairy courtyards. An adult Indian milkman wears an off-white
+kurta-pajama and a simple turban. His black roadster bicycle carries a clean,
+large stainless-steel milk collection can/drum securely on the rear carrier.
+Keep the milkman, bicycle, clothing, and steel drum consistent across shots.
+
+Shot 1 — first collection, approximately 0–5 seconds
+The milkman arrives by bicycle at a village courtyard and stops. With the
+bicycle stationary, a farmer pours fresh milk from a smaller steel vessel
+into the milkman's open collection drum. Show the milk pouring clearly.
+
+Shot 2 — second collection, approximately 5–10 seconds
+The same milkman cycles a short distance to another home. He parks and
+steadies the bicycle. Another farmer pours milk into the same steel drum.
+Use a closer view of the hands, milk stream, and clean steel vessels.
+
+Shot 3 — motorcycle arrival, approximately 10–15 seconds
+At the second collection point, another adult milk collector arrives on a
+motorcycle with steel milk cans secured to its sides. He parks, switches off
+the engine, and joins the collection. End on both collectors beside the
+milk cans in the village courtyard.
+
+Visual direction
+Natural movements, realistic hands and liquid, coherent vehicles, clean
+milk handling, gentle camera movement, and consistent morning light.
+No text, subtitles, watermarks, invented logos, or product packaging.
+Avoid pouring while riding, distorted wheels, extra limbs, and abrupt
+changes in the collectors' appearance. Quiet village ambience if supported.
+
+Integration after a usable clip has been generated and checked
+Save the actual playable MP4 under public/videos/ and set videoSrc on the
+village reel to its /videos/... URL. The existing card already supports a
+native video player with controls, inline playback, and a poster image.
+Do not set videoSrc to a nonexistent file or label the brief as a video.

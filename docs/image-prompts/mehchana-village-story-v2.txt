@@ -1,0 +1,12 @@
+Generator: built-in image_gen tool
+Final website asset: public/images/mehchana-village-story-v2.jpg
+Website overlay: A little village warmth. In every spoonful.
+
+Use case: illustration-story.
+Asset type: premium wide illustrated website story banner for Mehchana, an Indian ghee and mustard oil brand.
+Primary request: create an original Indian village panorama inspired by the FIRST of the two most recent user reference images, which is a hand-painted rural illustration. The second reference shows the existing website and is context only, not a scene to reproduce. Do not copy the reference composition.
+Scene: a peaceful Haryana village at sunrise, warm ivory sky, distant low farmland, mustard-yellow flowers and soft green fields. In the lower-right, a lovingly painted earthy courtyard and modest limewashed brick village house beside a broad leafy neem tree; a woman in a muted saffron dupatta gently churning butter in an earthen pot, a farmer carrying a steel milk can, a healthy white Indian cow and a calf nearby. Lower-left foreground a winding village footpath and little patches of golden mustard flowers. Respectful, natural proportions, exquisite rural details.
+Style: refined hand-painted Indian storybook mural, gouache and watercolor on warm ivory paper, graceful fine brushwork and tactile pigment, forest green, ochre, terracotta, butter gold, cream. Sophisticated artisanal food brand editorial illustration. Warm, inviting, authentic, tasteful, no cartoon exaggeration, no photographic collage.
+Composition: very wide panoramic landscape, approximately 2:1 aspect ratio. Village activity, cow, calf and house composed primarily across the BOTTOM HALF and toward the RIGHT. The upper-left 55% of the image must remain mostly clean pale ivory sky with subtle paper texture: this area is reserved for large dark-green website typography which will be added in HTML. Keep all important people and animals fully visible in the lower-middle/right area. Allow generous airy sky above.
+Text: no rendered text, no letters, no logos, no watermark. Website text will be overlaid separately for sharp, responsive typography.
+Create a beautiful finished detailed bitmap illustration, not a website screenshot.
