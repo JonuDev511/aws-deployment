@@ -27,6 +27,9 @@ test('cart JSON contains selected pack prices, quantities and accurate totals', 
   assert.equal(cart.items[1].unitPrice, 1575);
   assert.equal(cart.totalQuantity, 3);
   assert.equal(cart.subtotal, 2925);
+  assert.equal(cart.deliveryFee, 0);
+  assert.equal(cart.shippingCharge, 49);
+  assert.equal(cart.total, 2974);
   assert.equal(cart.currency, 'INR');
   assert.deepEqual(readSavedCart(products, storageWith(JSON.stringify(cart))).items, items);
 });
@@ -35,6 +38,8 @@ test('removing the last item persists an empty cart', () => {
   const items = changeCartQuantity([{ productId: 'cow', packIndex: 0, quantity: 1 }], 'cow', 0, 0);
   const cart = createCartData(items, products);
   assert.equal(cart.subtotal, 0);
+  assert.equal(cart.shippingCharge, 0);
+  assert.equal(cart.total, 0);
   assert.equal(cart.totalQuantity, 0);
   assert.deepEqual(readSavedCart(products, storageWith(JSON.stringify(cart))).items, []);
 });
@@ -45,6 +50,8 @@ test('saved prices and names are refreshed from the current catalogue', () => {
   const cart = createCartData(items, products);
   assert.equal(cart.items[0].name, 'Cow Ghee');
   assert.equal(cart.items[0].unitPrice, 675);
+  assert.equal(cart.shippingCharge, 49);
+  assert.equal(cart.total, 724);
 });
 
 test('invalid saved lines are discarded and duplicate packs merge within the limit', () => {

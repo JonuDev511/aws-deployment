@@ -15,17 +15,22 @@ test('removing one product removes its amount from the subtotal and checkout mes
   const updated = changeCartQuantity(items, 'cow', 0, 0);
   const cart = createCartData(updated, products);
   assert.equal(cart.subtotal, 1575);
+  assert.equal(cart.shippingCharge, 49);
+  assert.equal(cart.total, 1624);
   assert.equal(cart.totalQuantity, 1);
   const message = checkoutMessage(createCheckoutDraft(cart, details));
   assert.ok(!message.includes('Cow Ghee'));
   assert.ok(message.includes('Pure Mustard Oil · 5 litres × 1'));
   assert.ok(message.includes('₹1,575'));
+  assert.ok(message.includes('Total: ₹1,624'));
 });
 
 test('changing quantities updates the checkout subtotal', () => {
   const updated = changeCartQuantity(items, 'cow', 0, 3);
   const draft = createCheckoutDraft(createCartData(updated, products), details);
   assert.equal(draft.cart.subtotal, 3600);
+  assert.equal(draft.cart.shippingCharge, 49);
+  assert.equal(draft.cart.total, 3649);
   assert.equal(draft.cart.totalQuantity, 4);
 });
 
@@ -52,7 +57,7 @@ test('checkout rejects missing and invalid delivery details', () => {
   }
 });
 
-test('WhatsApp draft includes the complete selection and delivery details without promising free delivery', () => {
+test('WhatsApp draft includes free delivery, fixed shipping, and the final order total', () => {
   const draft = createCheckoutDraft(createCartData(items, products), { ...details, notes: 'Call before delivery' });
   const message = checkoutMessage(draft);
   assert.ok(message.includes('Cow Ghee · 250 g × 2 — ₹1,350'));
@@ -61,6 +66,8 @@ test('WhatsApp draft includes the complete selection and delivery details withou
   assert.ok(message.includes(details.address));
   assert.ok(message.includes(details.pincode));
   assert.ok(message.includes('Call before delivery'));
-  assert.ok(message.includes('Please confirm availability, delivery charges, and payment details.'));
-  assert.ok(!message.includes('Free'));
+  assert.ok(message.includes('Delivery fee: Free'));
+  assert.ok(message.includes('Shipping: ₹49'));
+  assert.ok(message.includes('Total: ₹2,974'));
+  assert.ok(message.includes('Please confirm availability and payment details.'));
 });

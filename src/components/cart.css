@@ -54,8 +54,9 @@
 .cart-summary { margin-bottom: 17px; }
 .cart-summary p { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 0; }
 .cart-subtotal { font-size: 13px; }
-.cart-subtotal strong { font-size: 24px; letter-spacing: -.035em; }
-.cart-summary .cart-delivery { margin-top: 8px; color: #78816e; font-size: 10px; }
+.cart-summary .cart-delivery, .cart-summary .cart-shipping { margin-top: 8px; color: #617055; font-size: 12px; }
+.cart-summary .cart-total { margin-top: 12px; padding-top: 12px; border-top: 1px solid #dce1d1; font-size: 14px; font-weight: 600; }
+.cart-total strong { font-size: 24px; letter-spacing: -.035em; }
 .cart-primary { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 56px; border: 0; border-radius: 12px; padding: 16px 20px; background: #163d2b; color: #fffdf8; font-size: 13px; font-weight: 600; text-align: left; transition: background .2s; }
 .cart-primary:hover { background: #28533b; }
 .cart-primary svg { width: 22px; height: 22px; flex-shrink: 0; }

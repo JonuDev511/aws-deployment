@@ -92,7 +92,7 @@ export default function Cart({ open, onClose, cart, setQuantity, formatPrice, st
               </div>{showPrices && <strong className="cart-line-total">{formatPrice(item.lineTotal)}</strong>}</div>
             </li>)}
           </ul>
-          <div className="cart-bottom-links"><button type="button" onClick={() => dialog.current.close()}>← Continue shopping</button><button type="button" onClick={() => downloadJson(cart, 'mehchana-cart.json')}>Download cart ↓</button></div>
+          <div className="cart-bottom-links"><button type="button" onClick={() => dialog.current.close()}>← Continue shopping</button></div>
         </> : isReview && order ? <>
           <div className="checkout-review-intro"><span><CartIcon name="check" /></span><div><h3>Ready when you are.</h3><p>Send your order to Mehchana on WhatsApp to confirm availability, delivery, and payment.</p></div></div>
           <section className="checkout-review-card" aria-labelledby="delivery-review-heading"><div className="checkout-section-title"><h3 id="delivery-review-heading">Deliver to</h3><button type="button" onClick={() => setStep('delivery')}>Edit details</button></div><p><strong>{order.customer.name}</strong><br />{order.customer.phone}</p><address>{order.customer.address}<br />{order.customer.city}, {order.customer.state} · {order.customer.pincode}</address>{order.customer.notes && <p className="checkout-notes">Note: {order.customer.notes}</p>}</section>
@@ -114,7 +114,12 @@ export default function Cart({ open, onClose, cart, setQuantity, formatPrice, st
       </div>
 
       {hasItems && <footer className="cart-footer">
-        <div className="cart-summary">{showPrices && <p className="cart-subtotal"><span>Items subtotal</span><strong>{formatPrice(cart.subtotal)}</strong></p>}<p className="cart-delivery"><span>Delivery</span><span>Confirmed with your order</span></p></div>
+        {showPrices && <div className="cart-summary" aria-live="polite" aria-atomic="true">
+          <p className="cart-subtotal"><span>Items subtotal</span><span>{formatPrice(cart.subtotal)}</span></p>
+          <p className="cart-delivery"><span>Delivery fee</span><span>Free</span></p>
+          <p className="cart-shipping"><span>Shipping</span><span>{formatPrice(cart.shippingCharge)}</span></p>
+          <p className="cart-total"><span>Total</span><strong>{formatPrice(cart.total)}</strong></p>
+        </div>}
         {isCart ? <button className="cart-primary" type="button" onClick={() => setStep('delivery')}>Continue to checkout <CartIcon name="arrow" /></button> : isReview ? <a className="cart-primary" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Send order on WhatsApp <CartIcon name="arrow" /></a> : <button className="cart-primary" type="submit" form="cart-checkout-form">Review your order <CartIcon name="arrow" /></button>}
         <p className="cart-footer-note">{isReview ? 'Send the message in WhatsApp to request your order. Payment is confirmed directly with Mehchana.' : 'Made with care. Packed for your everyday.'}</p>
       </footer>}

@@ -1,5 +1,6 @@
 export const CART_STORAGE_KEY = 'mehchana-cart';
 export const MAX_CART_QUANTITY = 99;
+export const SHIPPING_CHARGE = 49;
 
 export function changeCartQuantity(items, productId, packIndex, quantity) {
   if (!Number.isSafeInteger(quantity) || quantity < 0 || quantity > MAX_CART_QUANTITY) return items;
@@ -16,12 +17,17 @@ export function createCartData(items, products) {
     const unitPrice = Math.round(product.rate * pack.fraction * 100) / 100;
     return { ...item, name: product.name, pack: pack.label, image: product.image, unitPrice, lineTotal: Math.round(unitPrice * item.quantity * 100) / 100 };
   });
+  const subtotal = Math.round(lines.reduce((total, item) => total + item.lineTotal, 0) * 100) / 100;
+  const shippingCharge = lines.length > 0 ? SHIPPING_CHARGE : 0;
   return {
     version: 1,
     currency: 'INR',
     items: lines,
     totalQuantity: lines.reduce((total, item) => total + item.quantity, 0),
-    subtotal: Math.round(lines.reduce((total, item) => total + item.lineTotal, 0) * 100) / 100,
+    subtotal,
+    deliveryFee: 0,
+    shippingCharge,
+    total: Math.round((subtotal + shippingCharge) * 100) / 100,
   };
 }
 

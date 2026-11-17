@@ -16,7 +16,7 @@ export default function useCart(products) {
       window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(createCartData(items, products)));
       setStorageError('');
     } catch {
-      setStorageError('Your cart could not be saved in this browser. Keep this page open or download your cart to keep a copy.');
+      setStorageError('Your cart could not be saved in this browser. Keep this page open; changes may be lost after a refresh.');
     }
   }, [items, products]);
 

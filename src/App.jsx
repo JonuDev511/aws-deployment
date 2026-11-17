@@ -236,7 +236,7 @@ function App() {
             })}
             </div>)}
           </div>
-          <p className="product-note">Choose your pack to see the price. Please confirm availability and delivery charges with us before ordering.</p>
+          <p className="product-note">Choose your pack to see the price. Delivery fee is free; shipping is ₹49 per order. Please confirm availability with us before ordering.</p>
         </section>
 
         <section className="process-section" id="process" aria-labelledby="process-heading">

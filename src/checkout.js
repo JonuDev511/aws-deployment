@@ -16,8 +16,8 @@ export function checkoutMessage(order, showPrices = true) {
   return [
     'Hello Mehchana, I would like to place an order:', '',
     ...cart.items.map(item => `${item.name} · ${item.pack} × ${item.quantity}${showPrices ? ` — ${price(item.lineTotal)}` : ''}`),
-    ...(showPrices ? ['', `Items subtotal: ${price(cart.subtotal)}`] : []),
-    'Please confirm availability, delivery charges, and payment details.', '',
+    ...(showPrices ? ['', `Items subtotal: ${price(cart.subtotal)}`, 'Delivery fee: Free', `Shipping: ${price(cart.shippingCharge)}`, `Total: ${price(cart.total)}`] : []),
+    'Please confirm availability and payment details.', '',
     `Name: ${customer.name}`, `Mobile: ${customer.phone}`,
     `Delivery address: ${customer.address}, ${customer.city}, ${customer.state} — ${customer.pincode}`,
     ...(customer.notes ? [`Delivery notes: ${customer.notes}`] : []),
