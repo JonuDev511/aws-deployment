@@ -3,6 +3,8 @@ import StoryPage from './pages/StoryPage.jsx';
 import ProcessPage from './pages/ProcessPage.jsx';
 import { processSteps } from './pages/process-data.js';
 import MobileNavigation from './components/MobileNavigation.jsx';
+import Cart from './components/Cart.jsx';
+import useCart from './useCart.js';
 import './pages/pages.css';
 
 const business = {
@@ -46,6 +48,8 @@ function App() {
   const [pageLocation, setPageLocation] = useState(readLocation);
   const pathname = new URL(pageLocation, window.location.origin).pathname.replace(/\/+$/, '') || '/';
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const { cart, addItem, setQuantity, notice: cartNotice, storageError } = useCart(products);
   const [activeSection, setActiveSection] = useState('home');
   const [heroProductIndex, setHeroProductIndex] = useState(0);
   const heroProducts = ['cow', 'buffalo', 'mustard', 'loni'].map(id => products.find(product => product.id === id));
@@ -128,13 +132,6 @@ function App() {
     { id: 'ghee', label: 'Ghee and butter products', products: filteredProducts.filter(product => product.category !== 'oil') },
     { id: 'oil', label: 'Mustard oil', products: filteredProducts.filter(product => product.category === 'oil') },
   ];
-  function chooseProduct(product, pack) {
-    setSelected(product.name);
-    setEnquirySummary(`${product.name} · ${pack.label} · ${formatPrice(product.rate * pack.fraction)}`);
-    setStatus('');
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-  }
-
   function submitEnquiry(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -161,10 +158,10 @@ function App() {
       <header className="site-header">
         <a className="wordmark" href="/" aria-label="Mehchana home"><span className="brand-symbol" aria-hidden="true">✳</span><span>MEHCHANA<small>SHUDDH DESI GHEE</small></span></a>
         <div className="header-mobile-actions">
-          <a className="header-bag" href={enquirySummary ? '/#contact' : '/#products'} aria-label={enquirySummary ? 'View your selected product enquiry' : 'Browse products'}>
+          <button className="header-bag" type="button" onClick={() => { setMenuOpen(false); setCartOpen(true); }} aria-label={`View cart, ${cart.totalQuantity} ${cart.totalQuantity === 1 ? 'item' : 'items'}`} aria-haspopup="dialog" aria-controls="shopping-cart" aria-expanded={cartOpen}>
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 11h20l-1.5 17h-17L6 11Z" /><path d="M11 12V9a5 5 0 0 1 10 0v3" /></svg>
-            {enquirySummary && <span className="header-bag-count" aria-hidden="true">1</span>}
-          </a>
+            {cart.totalQuantity > 0 && <span className="header-bag-count" aria-hidden="true">{cart.totalQuantity}</span>}
+          </button>
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-navigation">{menuOpen ? 'Close −' : 'Menu +'}</button>
         </div>
         <nav id="main-navigation" className={menuOpen ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
@@ -217,6 +214,8 @@ function App() {
           <div className="section-heading"><div><p className="eyebrow">FOUR FAVOURITES. ONE FAMILIAR FEELING.</p><h2>Good food begins<br /><em>with good essentials.</em></h2></div><p>From the first tadka to the finishing spoonful, find a place for Mehchana in your everyday cooking.</p></div>
           <div className="product-toolbar"><div className="filters" aria-label="Filter products">{[['all', 'All products'], ['ghee', 'Desi ghee'], ['butter', 'Butter'], ['oil', 'Mustard oil']].map(([id, label]) => <button key={id} className={filter === id ? 'active' : ''} aria-pressed={filter === id} onClick={() => setFilter(id)}>{label}</button>)}</div><span>{filteredProducts.length} KITCHEN ESSENTIALS</span></div>
           {productGroups[0].products.length > 1 && <p className="product-swipe-hint">Swipe to see more ghee <span aria-hidden="true">→</span></p>}
+          <div className="cart-feedback" role="status">{cartNotice && <><span>{cartNotice}</span><button type="button" onClick={() => setCartOpen(true)}>View cart ({cart.totalQuantity})</button></>}</div>
+          {storageError && <p className="cart-save-warning" role="alert">{storageError}</p>}
           <div className="product-grid">
             {productGroups.filter(group => group.products.length > 0).map(group => <div className={`product-group product-group--${group.id}`} key={`${group.id}-${filter}`} role="region" aria-label={group.label}>
             {group.products.map(product => {
@@ -231,7 +230,7 @@ function App() {
                   <div className="product-price" aria-live="polite" aria-atomic="true"><strong>{formatPrice(product.rate * pack.fraction)}</strong><span>for {pack.label} · {formatPrice(product.rate)} / {product.unit}</span></div>
                   <button className="product-detail" aria-expanded={expanded === product.id} aria-controls={`detail-${product.id}`} onClick={() => setExpanded(expanded === product.id ? null : product.id)}>About this product <span>{expanded === product.id ? '−' : '+'}</span></button>
                   <p id={`detail-${product.id}`} className="expanded-detail" hidden={expanded !== product.id}>{product.detail}</p>
-                  <button className="product-enquire" onClick={() => chooseProduct(product, pack)}>Enquire to order <Arrow /></button>
+                  <button className="product-add-cart" type="button" aria-label={`Add ${product.name}, ${pack.label} to cart`} onClick={() => { addItem(product, chosenPacks[product.id] ?? 0); setMenuOpen(false); setCartOpen(true); }}>Add to cart <span aria-hidden="true">+</span></button>
                 </div>
               </article>;
             })}
@@ -311,6 +310,7 @@ function App() {
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Mehchana. All rights reserved.</span><span>WITH A LITTLE TRADITION &amp; A LOT OF HEART <span aria-hidden="true">✳</span></span></div>
       </footer>
       <MobileNavigation pathname={pathname} activeSection={activeSection} pageLocation={pageLocation} products={products} business={business} formatPrice={formatPrice} onSelectProduct={product => { setFilter('all'); setExpanded(product.id); }} />
+      <Cart open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setQuantity={setQuantity} formatPrice={formatPrice} storageError={storageError} notice={cartNotice} business={business} />
     </div>
   );
 }
