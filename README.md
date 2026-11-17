@@ -1,4 +1,4 @@
-# aws-deployment
+# Mehchana
 
 A simple React JavaScript application built with Vite.
 
@@ -23,6 +23,12 @@ npm run preview
 ```
 
 The production files are generated in `dist/`. This folder can be hosted on a static hosting service such as AWS Amplify or Amazon S3 with CloudFront.
+
+## Vercel deployment
+
+Import this repository into Vercel with the Vite framework preset. The checked-in `vercel.json` sets the build command to `npm run build` and the output directory to `dist`. Use Node.js 22.12 or newer. No environment variables are required for the current storefront.
+
+The build generates HTML entry points for `/`, `/story`, and `/process`. Clean URLs and redirects without trailing slashes are configured in `vercel.json`. Cart data stays in the visitor's browser; checkout prepares a WhatsApp order request.
 
 ## Mehchana content and enquiries
 
